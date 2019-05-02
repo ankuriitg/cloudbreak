@@ -8,7 +8,6 @@ import org.springframework.context.annotation.DependsOn;
 import com.sequenceiq.environment.config.registry.DNSServiceAddressResolver;
 import com.sequenceiq.environment.config.registry.RetryingServiceAddressResolver;
 import com.sequenceiq.environment.config.registry.ServiceAddressResolver;
-import com.sequenceiq.environment.config.registry.ServiceAddressResolvingException;
 
 @Configuration
 public class ServiceEndpointConfig {
@@ -38,13 +37,13 @@ public class ServiceEndpointConfig {
 
     @Bean
     @DependsOn("serviceAddressResolver")
-    public String databaseAddress(ServiceAddressResolver serviceAddressResolver) throws ServiceAddressResolvingException {
+    public String databaseAddress(ServiceAddressResolver serviceAddressResolver) {
         return serviceAddressResolver.resolveHostPort(dbHost, dbPort, databaseId);
     }
 
     @Bean
     @DependsOn("serviceAddressResolver")
-    public String cloudbreakUrl(ServiceAddressResolver serviceAddressResolver) throws ServiceAddressResolvingException {
+    public String cloudbreakUrl(ServiceAddressResolver serviceAddressResolver) {
         return serviceAddressResolver.resolveUrl(cloudbreakUrl, "http", cloudbreakServiceId);
     }
 

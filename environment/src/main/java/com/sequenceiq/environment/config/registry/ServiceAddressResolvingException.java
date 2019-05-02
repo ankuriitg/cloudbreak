@@ -1,6 +1,6 @@
 package com.sequenceiq.environment.config.registry;
 
-public class ServiceAddressResolvingException extends Exception {
+public class ServiceAddressResolvingException extends RuntimeException {
 
     public ServiceAddressResolvingException(String message) {
         super(message);

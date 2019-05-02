@@ -65,7 +65,7 @@ public class DatabaseConfig {
     @Value("#{'${environment.cert.dir:}/${environment.db.env.cert.file:}'}")
     private String certFile;
 
-    @Value("${environment.hbm2denvironment.strategy:validate}")
+    @Value("${environment.hbm2d.strategy:validate}")
     private String hbm2ddlStrategy;
 
     @Value("${environment.hibernate.debug:false}")
