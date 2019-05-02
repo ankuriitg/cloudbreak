@@ -1,4 +1,4 @@
-package com.sequenceiq.environment.config.registry;
+package com.sequenceiq.environment.configuration.registry;
 
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;

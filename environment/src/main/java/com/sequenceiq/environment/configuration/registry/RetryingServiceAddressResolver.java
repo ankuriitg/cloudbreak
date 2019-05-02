@@ -1,4 +1,4 @@
-package com.sequenceiq.environment.config.registry;
+package com.sequenceiq.environment.configuration.registry;
 
 import static com.sequenceiq.environment.util.Validation.notNull;
 

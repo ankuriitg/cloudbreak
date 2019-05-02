@@ -1,13 +1,13 @@
-package com.sequenceiq.environment.config;
+package com.sequenceiq.environment.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
-import com.sequenceiq.environment.config.registry.DNSServiceAddressResolver;
-import com.sequenceiq.environment.config.registry.RetryingServiceAddressResolver;
-import com.sequenceiq.environment.config.registry.ServiceAddressResolver;
+import com.sequenceiq.environment.configuration.registry.DNSServiceAddressResolver;
+import com.sequenceiq.environment.configuration.registry.RetryingServiceAddressResolver;
+import com.sequenceiq.environment.configuration.registry.ServiceAddressResolver;
 
 @Configuration
 public class ServiceEndpointConfig {
@@ -15,19 +15,19 @@ public class ServiceEndpointConfig {
     @Value("${environment.address.resolving.timeout:60000}")
     private int resolvingTimeout;
 
-    @Value("${environment.db.port.5432.tcp.addr:}")
+    @Value("${environment.db.host:}")
     private String dbHost;
 
-    @Value("${environment.db.port.5432.tcp.port:}")
+    @Value("${environment.db.port:}")
     private String dbPort;
 
-    @Value("${environment.db.serviceid:}")
+    @Value("${environment.db.serviceId:}")
     private String databaseId;
 
     @Value("${environment.cloudbreak.url:}")
     private String cloudbreakUrl;
 
-    @Value("${environment.cloudbreak.serviceid:}")
+    @Value("${environment.cloudbreak.serviceId:}")
     private String cloudbreakServiceId;
 
     @Bean

@@ -20,6 +20,9 @@ repositories {
 
 dependencies {
   compile project(':flow')
+  compile project(':cloud-common')
+  compile project(':cloud-reactor-api')
+  compile project(':cloud-reactor')
   
   compile     group: 'com.google.code.gson',      name: 'gson'
   compile     group: 'dnsjava',                   name: 'dnsjava'
@@ -38,6 +41,8 @@ dependencies {
   compile     group: 'org.springframework.boot',  name: 'spring-boot-starter-actuator'
   compile     group: 'org.springframework.boot',  name: 'spring-boot-starter-jersey'
   compile     group: 'org.springframework.boot',  name: 'spring-boot-starter-data-jpa'
+  compile     group: 'io.projectreactor',         name: 'reactor-core',                   version: eventBusVersion
+  compile     group: 'io.projectreactor',         name: 'reactor-bus',                    version: eventBusVersion
 
   testCompile group: 'org.junit.jupiter',         name: 'junit-jupiter-api'
   testCompile ('org.springframework.boot:spring-boot-starter-test') {

@@ -29,8 +29,11 @@ environment:
   structuredevent:
     rest:
       enabled: false
+  cloudbreak:
+    url: "localhost:9091"
   db:
-    port.5432.tcp.port: 5432
+    host: localhost
+    port: 5432
     env:
       user: postgres
       pass:

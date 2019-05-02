@@ -1,4 +1,4 @@
-package com.sequenceiq.environment.config;
+package com.sequenceiq.environment.configuration;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
-@SpringBootApplication(scanBasePackages = "com.sequenceiq.environment", exclude = WebMvcMetricsAutoConfiguration.class)
+//@EnableJpaRepositories(basePackages = { "com.sequenceiq.cloudbreak.repository", "com.sequenceiq.freeipa.repository" })
+@SpringBootApplication(scanBasePackages = {"com.sequenceiq.environment", "com.sequenceiq.cloudbreak"},
+        exclude = WebMvcMetricsAutoConfiguration.class)
 public class EnvironmentApplication {
 
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package com.sequenceiq.environment.config;
+package com.sequenceiq.environment.configuration;
 
 import java.util.List;
 import java.util.stream.Collectors;

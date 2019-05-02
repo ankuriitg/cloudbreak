@@ -1,6 +1,6 @@
 package com.sequenceiq.environment.env;
 
-import org.jvnet.hk2.annotations.Service;
+import org.springframework.stereotype.Service;
 
 @Service
 public class EnvironmentCreationService {
