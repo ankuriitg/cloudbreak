@@ -20,10 +20,14 @@ repositories {
 
 dependencies {
   compile project(':flow')
-  compile project(':cloud-common')
   compile project(':cloud-reactor-api')
   compile project(':cloud-reactor')
-  
+
+  runtime project(':cloud-common')
+  runtime project(':cloud-aws')
+  runtime project(':cloud-azure')
+  runtime project(':cloud-gcp')
+
   compile     group: 'com.google.code.gson',      name: 'gson'
   compile     group: 'dnsjava',                   name: 'dnsjava'
   compile     group: 'io.micrometer',             name: 'micrometer-core'

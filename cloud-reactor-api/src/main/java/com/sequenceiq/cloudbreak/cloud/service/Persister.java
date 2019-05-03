@@ -18,5 +18,5 @@ public interface Persister<T> {
 
     T retrieve(T data);
 
-    T delete(T notification);
+    T delete(T data);
 }

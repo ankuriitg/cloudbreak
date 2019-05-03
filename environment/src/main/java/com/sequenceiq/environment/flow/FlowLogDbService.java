@@ -18,6 +18,7 @@ import com.sequenceiq.cloudbreak.service.TransactionService;
 
 @Service
 public class FlowLogDbService implements FlowLogService {
+
     @Override
     public FlowLog save(String flowId, String flowChanId, String key, Payload payload, Map<Object, Object> variables, Class<?> flowType, FlowState currentState) {
         return null;

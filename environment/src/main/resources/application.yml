@@ -23,6 +23,10 @@ management:
       percentiles:
         "[http.server.requests]": "0.5, 0.95"
 
+altus:
+  ums:
+    host: localhost
+
 environment:
   cert.dir: /certs/
   client.id: environment
@@ -41,3 +45,65 @@ environment:
       schema: public
       cert.file: database.crt
       ssl: false
+
+vault:
+  addr: vault.service.consul
+  port: 8200
+  ssl.enabled: false
+  kv.engine.v2.path: secret
+  auth:
+    type: "token"
+    kubernetes:
+      service.account.token.path: /var/run/secrets/kubernetes.io/serviceaccount/token
+      mount.path: "dps-dev"
+      login.role: "cloudbreak.default"
+
+# temporary configs:
+
+cb:
+  intermediate.threadpool:
+    core.size: 40
+    capacity.size: 4000
+
+
+  etc:
+    config:
+      dir: "/temp"
+
+  max:
+    azure.resource.name.length: 120
+    aws.resource.name.length: 50
+    gcp.resource.name.length: 63
+
+  aws:
+    spotinstances.enabled: true
+    disabled.instance.types: c5d,f1,i3,m5d,p3dn,r5d,z1d
+    hostkey.verify: false
+    external.id: provision-ambari
+    role.session.name: hadoop-provisioning
+    cf.template.new.path: templates/aws-cf-stack.ftl
+    default.inbound.security.group:
+    vpc:
+
+  azure:
+    host.name.prefix.length: 255
+
+  gcp:
+    hostkey.verify: false
+    disk.encryption.url: https://cloud-certs.storage.googleapis.com/google-cloud-csek-ingress.pem
+
+  cloud:
+    api:
+      executorservice:
+        pool:
+          size: 1
+
+  arm:
+    template.path: templates/arm-v2.ftl
+    parameter.path: templates/parameters.ftl
+    app.creation.template:
+      command.path: templates/app-creation-command.ftl
+      json.path: templates/app-creation.json
+      resource:
+        app.id: 797f4846-ba00-4fd7-ba43-dac1f8f63013
+        access.scope.id: 41094075-9dad-400e-a0bd-54e686782033

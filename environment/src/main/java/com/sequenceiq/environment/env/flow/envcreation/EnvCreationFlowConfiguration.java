@@ -20,7 +20,9 @@ import com.sequenceiq.cloudbreak.core.flow2.config.AbstractFlowConfiguration.Tra
 import com.sequenceiq.cloudbreak.core.flow2.config.RetryableFlowConfiguration;
 
 @Component
-public class EnvCreationFlowConfig extends AbstractFlowConfiguration<EnvCreationState, EnvCreationEvent> implements RetryableFlowConfiguration<EnvCreationEvent> {
+public class EnvCreationFlowConfiguration extends AbstractFlowConfiguration<EnvCreationState, EnvCreationEvent>
+        implements RetryableFlowConfiguration<EnvCreationEvent> {
+
     private static final List<Transition<EnvCreationState, EnvCreationEvent>> TRANSITIONS = new Builder<EnvCreationState, EnvCreationEvent>()
             .defaultFailureEvent(EnvCreationEvent.ENV_CREATION_FAILED_EVENT)
             .from(INIT_STATE).to(ENV_CREATION_STARTED_STATE).event(EnvCreationEvent.START_ENV_CREATION_EVENT).noFailureEvent()
@@ -31,7 +33,7 @@ public class EnvCreationFlowConfig extends AbstractFlowConfiguration<EnvCreation
     private static final FlowEdgeConfig<EnvCreationState, EnvCreationEvent> EDGE_CONFIG =
             new FlowEdgeConfig<>(INIT_STATE, FINAL_STATE, ENV_CREATION_FAILED_STATE, ENV_CREATION_FAILURE_HANDLED_EVENT);
 
-    public EnvCreationFlowConfig() {
+    public EnvCreationFlowConfiguration() {
         super(EnvCreationState.class, EnvCreationEvent.class);
     }
 
