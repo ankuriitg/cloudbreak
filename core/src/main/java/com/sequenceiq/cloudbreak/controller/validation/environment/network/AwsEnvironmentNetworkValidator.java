@@ -16,11 +16,16 @@ public class AwsEnvironmentNetworkValidator implements EnvironmentNetworkValidat
     public void validate(EnvironmentNetworkV4Request networkV4Request, ValidationResult.ValidationResultBuilder resultBuilder) {
         if (networkV4Request != null) {
             if (networkV4Request.getAws() != null) {
-                if (StringUtils.isEmpty(networkV4Request.getAws().getVpcId())) {
-                    resultBuilder.error(missingParamErrorMessage("VPC identifier(vpcId)'", getCloudPlatform().name()));
+                if (networkV4Request.getSubnetIds().isEmpty()) {
+                    resultBuilder.error(missingParamErrorMessage("subnet identifiers(subnetIds)"));
                 }
+                if (StringUtils.isEmpty(networkV4Request.getAws().getVpcId())) {
+                    resultBuilder.error(missingParamErrorMessage("VPC identifier(vpcId)'"));
+                }
+            } else if (networkV4Request.getSubnetCidrs().isEmpty()) {
+                resultBuilder.error(missingParamErrorMessage("subnetCidrs"));
             } else {
-                resultBuilder.error(missingParamsErrorMsg(AWS));
+                resultBuilder.error(missingParamsErrorMsg());
             }
         }
     }

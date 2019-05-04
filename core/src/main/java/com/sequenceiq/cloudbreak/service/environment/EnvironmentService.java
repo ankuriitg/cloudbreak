@@ -83,6 +83,7 @@ import com.sequenceiq.cloudbreak.service.rdsconfig.RdsConfigService;
 import com.sequenceiq.cloudbreak.service.sharedservice.AmbariDatalakeConfigProvider;
 import com.sequenceiq.cloudbreak.service.sharedservice.DatalakeConfigApiConnector;
 import com.sequenceiq.cloudbreak.service.sharedservice.ServiceDescriptorDefinitionProvider;
+import com.sequenceiq.cloudbreak.service.stack.CreateCloudResourceService;
 import com.sequenceiq.cloudbreak.service.stack.StackApiViewService;
 import com.sequenceiq.cloudbreak.service.stack.StackService;
 
@@ -163,6 +164,9 @@ public class EnvironmentService extends AbstractArchivistService<Environment> {
 
     @Inject
     private Map<CloudPlatform, EnvironmentNetworkConverter> environmentNetworkConverterMap;
+
+    @Inject
+    private CreateCloudResourceService createCloudResourceService;
 
     public Set<SimpleEnvironmentV4Response> listByWorkspaceId(Long workspaceId) {
         Set<SimpleEnvironmentV4Response> environmentResponses = environmentViewService.findAllByWorkspaceId(workspaceId).stream()
@@ -555,6 +559,12 @@ public class EnvironmentService extends AbstractArchivistService<Environment> {
             if (environmentNetworkConverter != null) {
                 BaseNetwork baseNetwork = environmentNetworkConverter.convert(networkRequest, environment);
                 network = environmentNetworkService.save(baseNetwork);
+                if (!network.getSubnetCidrsSet().isEmpty()) {
+                    createCloudResourceService.createdCloudNetwork(
+                            environment.getCredential(),
+                            environment.getCloudPlatform(),
+                            network.getSubnetCidrsSet());
+                }
             }
         }
         return network;

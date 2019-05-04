@@ -60,9 +60,14 @@ public abstract class BaseNetwork implements WorkspaceAwareResource, ArchivableR
     @Column(columnDefinition = "TEXT", nullable = false)
     private Json subnetIds;
 
+    @Convert(converter = JsonToString.class)
+    @Column(columnDefinition = "TEXT", nullable = false)
+    private Json subnetCidrs;
+
     public BaseNetwork() {
         try {
             subnetIds = new Json(new HashSet<String>());
+            subnetCidrs = new Json(new HashSet<String>());
         } catch (JsonProcessingException e) {
             throw new IllegalStateException(e);
         }
@@ -121,6 +126,23 @@ public abstract class BaseNetwork implements WorkspaceAwareResource, ArchivableR
 
     public Set<String> getSubnetIdsSet() {
         return JsonUtil.jsonToType(subnetIds.getValue(), new TypeReference<>() {
+        });
+    }
+
+    public Json getSubnetCidrs() {
+        return subnetCidrs;
+    }
+
+    public void setSubnetCidrs(Set<String> subnetCidrs) {
+        try {
+            this.subnetCidrs = new Json(subnetCidrs);
+        } catch (JsonProcessingException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+
+    public Set<String> getSubnetCidrsSet() {
+        return JsonUtil.jsonToType(subnetCidrs.getValue(), new TypeReference<>() {
         });
     }
 

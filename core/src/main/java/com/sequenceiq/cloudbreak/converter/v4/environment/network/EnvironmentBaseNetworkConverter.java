@@ -31,6 +31,7 @@ public abstract class EnvironmentBaseNetworkConverter implements EnvironmentNetw
         result.setEnvironment(environment);
         result.setWorkspace(environment.getWorkspace());
         result.setSubnetIds(source.getSubnetIds());
+        result.setSubnetCidrs(source.getSubnetCidrs());
         return result;
     }
 
@@ -40,6 +41,7 @@ public abstract class EnvironmentBaseNetworkConverter implements EnvironmentNetw
         result.setId(source.getId());
         result.setName(source.getName());
         result.setSubnetIds(source.getSubnetIdsSet());
+        result.setSubnetCidrs(source.getSubnetCidrsSet());
         result = setProviderSpecificFields(result, source);
         return result;
     }
@@ -52,6 +54,7 @@ public abstract class EnvironmentBaseNetworkConverter implements EnvironmentNetw
 
         Map<String, Object> attributes = new HashMap<>();
         attributes.put("subnetId", String.join(",", source.getSubnetIdsSet()));
+        attributes.put("subnetCidrs", String.join(",", source.getSubnetCidrsSet()));
         attributes.put("cloudPlatform", getCloudPlatform().name());
         attributes.putAll(getAttributesForLegacyNetwork(source));
         try {

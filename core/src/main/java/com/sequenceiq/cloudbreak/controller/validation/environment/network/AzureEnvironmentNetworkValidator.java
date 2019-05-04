@@ -17,14 +17,19 @@ public class AzureEnvironmentNetworkValidator implements EnvironmentNetworkValid
     public void validate(EnvironmentNetworkV4Request networkV4Request, ValidationResult.ValidationResultBuilder resultBuilder) {
         EnvironmentNetworkAzureV4Params azureV4Params = networkV4Request.getAzure();
         if (azureV4Params != null) {
+            if (networkV4Request.getSubnetIds().isEmpty()) {
+                resultBuilder.error(missingParamErrorMessage("subnet identifiers(subnetIds)"));
+            }
             if (StringUtils.isEmpty(azureV4Params.getNetworkId())) {
-                resultBuilder.error(missingParamErrorMessage("network identifier(networkId)", getCloudPlatform().name()));
+                resultBuilder.error(missingParamErrorMessage("network identifier(networkId)"));
             }
             if (StringUtils.isEmpty(azureV4Params.getResourceGroupName())) {
-                resultBuilder.error(missingParamErrorMessage("resource group's name(resourceGroupName)", getCloudPlatform().name()));
+                resultBuilder.error(missingParamErrorMessage("resource group's name(resourceGroupName)"));
             }
+        } else if (networkV4Request.getSubnetCidrs().isEmpty()) {
+            resultBuilder.error(missingParamErrorMessage("subnetCidrs"));
         } else {
-            resultBuilder.error(missingParamsErrorMsg(AZURE));
+            resultBuilder.error(missingParamsErrorMsg());
         }
     }
 
